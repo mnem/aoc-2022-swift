@@ -1,52 +1,48 @@
 import Foundation
 import ArgumentParser
 
+fileprivate let Day = 1
+
 extension AdventOfCode2022 {
     struct Day01: AsyncParsableCommand {
         static var configuration = CommandConfiguration(
-            abstract: "🎄 Day 1",
+            abstract: "🎄 Day \(Day)",
             subcommands: [A.self, B.self],
             defaultSubcommand: B.self
         )
-    }
-}
-
-extension AdventOfCode2022.Day01 {
-    struct A: AsyncParsableCommand {
-        static var configuration = CommandConfiguration(abstract: "⭐️ Day 1a")
-        @OptionGroup var options: AdventOfCode2022.Options
-        var input: URL { options.test ? Resource.TestInput.day01 : Resource.Input.day01 }
         
-        mutating func run() async throws {
-            print(try await process(input: input))
+        struct A: AsyncParsableCommand {
+            static var configuration = CommandConfiguration(abstract: "⭐️ Day \(Day)a")
+            @OptionGroup var options: AdventOfCode2022.Options
+            
+            mutating func run() async throws {
+                print(try await process(input: Resource.input(day: Day, test: options.test)))
+            }
+            
+            func process(input: URL) async throws -> String {
+                let rations = try LineReader(source: input).read(skipEmpty: false).toElfRations()
+                let result = rations.map { $0.reduce(0, +) } .max()
+                return "\(result!)"
+            }
         }
         
-        func process(input: URL) async throws -> String {
-            let rations = try LineReader(source: input).read().toElfRations()
-            let result = rations.map { $0.reduce(0, +) } .max()
-            return "\(result!)"
-        }
-    }
-}
-
-extension AdventOfCode2022.Day01 {
-    struct B: AsyncParsableCommand {
-        static var configuration = CommandConfiguration(abstract: "⭐️ Day 1b")
-        @OptionGroup var options: AdventOfCode2022.Options
-        var input: URL { options.test ? Resource.TestInput.day01 : Resource.Input.day01 }
-
-        mutating func run() async throws {
-            print(try await process(input: input))
-        }
-        
-        func process(input: URL) async throws -> String {
-            let rations = try LineReader(source: input).read().toElfRations()
-            let result = rations
-                .map { $0.reduce(0, +) }
-                .sorted()
-                .dropFirst(rations.count - 3)
-                .reduce(0, +)
-            return "\(result)"
+        struct B: AsyncParsableCommand {
+            static var configuration = CommandConfiguration(abstract: "⭐️ Day \(Day)b")
+            @OptionGroup var options: AdventOfCode2022.Options
+            
+            mutating func run() async throws {
+                print(try await process(input: Resource.input(day: Day, test: options.test)))
+            }
+            
+            func process(input: URL) async throws -> String {
+                let rations = try LineReader(source: input).read(skipEmpty: false).toElfRations()
+                let result = rations
+                    .map { $0.reduce(0, +) }
+                    .sorted()
+                    .dropFirst(rations.count - 3)
+                    .reduce(0, +)
+                return "\(result)"
+            }
         }
     }
 }
