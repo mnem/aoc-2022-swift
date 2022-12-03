@@ -7,13 +7,15 @@ let package = Package(
     name: "aoc-2022-swift",
     platforms: [.macOS(.v12)],
     dependencies: [
-        .package(url: "https://github.com/apple/swift-argument-parser", from: "1.1.0")
+        .package(url: "https://github.com/apple/swift-argument-parser", from: "1.1.0"),
+        .package(url: "https://github.com/apple/swift-algorithms", from: "1.0.0"),
     ],
     targets: [
         .executableTarget(
             name: "aoc-2022-swift",
             dependencies: [
-                .product(name: "ArgumentParser", package: "swift-argument-parser")
+                .product(name: "ArgumentParser", package: "swift-argument-parser"),
+                .product(name: "Algorithms", package: "swift-algorithms"),
             ],
             path: "Sources",
             resources: [

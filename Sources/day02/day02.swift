@@ -116,10 +116,6 @@ extension AdventOfCode2022 {
     }
 }
 
-extension String {
-    
-}
-
 extension Array where Element == String {
     func parse(
         shape: (String) -> AdventOfCode2022.Day02.Shape?
