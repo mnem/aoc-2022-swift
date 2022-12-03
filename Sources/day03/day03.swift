@@ -23,7 +23,7 @@ extension AdventOfCode2022 {
             func process(input: URL) async throws -> String {
                 try LineReader(source: input)
                     .read()
-                    .parse { Array($0) }
+                    .map { Array($0) }
                     .map { $0.bisect() }
                     .map { Set($0.0).intersection(Set($0.1)) }
                     .flatMap(Array.init)
@@ -43,7 +43,7 @@ extension AdventOfCode2022 {
             func process(input: URL) async throws -> String {
                 try LineReader(source: input)
                     .read()
-                    .parse { Set(Array($0)) }
+                    .map { Set(Array($0)) }
                     .chunks(ofCount: 3)
                     .flatMap {
                         let initial = $0.dropFirst().first!
@@ -78,14 +78,6 @@ extension Character {
         }
     }
 }
-
-//extension String {
-//    var sumAsRucksackPriority: Int {
-//        get throws {
-//            try map { try $0.rucksackPriority } .reduce(0, +)
-//        }
-//    }
-//}
 
 extension Array where Element == Character {
     var sumAsRucksackPriority: Int {
