@@ -5,22 +5,22 @@ import Algorithms
 fileprivate let Day = 3
 
 extension AdventOfCode2022 {
-    struct Day03: AsyncParsableCommand {
+    struct Day03: ParsableCommand {
         static var configuration = CommandConfiguration(
             abstract: "🎄 Day \(Day)",
             subcommands: [A.self, B.self],
             defaultSubcommand: B.self
         )
 
-        struct A: AsyncParsableCommand {
+        struct A: ParsableCommand {
             static var configuration = CommandConfiguration(abstract: "⭐️ Day \(Day)a")
             @OptionGroup var options: AdventOfCode2022.Options
 
-            mutating func run() async throws {
-                print(try await process(input: Resource.input(day: Day, test: options.test)))
+            mutating func run() throws {
+                print(try process(input: Resource.input(day: Day, test: options.test)))
             }
             
-            func process(input: URL) async throws -> String {
+            func process(input: URL) throws -> String {
                 try LineReader(source: input)
                     .read()
                     .map { Array($0) }
@@ -32,15 +32,15 @@ extension AdventOfCode2022 {
             }
         }
         
-        struct B: AsyncParsableCommand {
+        struct B: ParsableCommand {
             static var configuration = CommandConfiguration(abstract: "⭐️ Day \(Day)b")
             @OptionGroup var options: AdventOfCode2022.Options
 
-            mutating func run() async throws {
-                print(try await process(input: Resource.input(day: Day, test: options.test)))
+            mutating func run() throws {
+                print(try process(input: Resource.input(day: Day, test: options.test)))
             }
             
-            func process(input: URL) async throws -> String {
+            func process(input: URL) throws -> String {
                 try LineReader(source: input)
                     .read()
                     .map { Set(Array($0)) }

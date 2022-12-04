@@ -4,7 +4,7 @@ import ArgumentParser
 fileprivate let Day = 2
 
 extension AdventOfCode2022 {
-    struct Day02: AsyncParsableCommand {
+    struct Day02: ParsableCommand {
         static var configuration = CommandConfiguration(
             abstract: "🎄 Day \(Day)",
             subcommands: [A.self, B.self],
@@ -55,7 +55,7 @@ extension AdventOfCode2022 {
             }
         }
 
-        struct A: AsyncParsableCommand {
+        struct A: ParsableCommand {
             static var configuration = CommandConfiguration(abstract: "⭐️ Day \(Day)a")
             @OptionGroup var options: AdventOfCode2022.Options
             
@@ -68,11 +68,11 @@ extension AdventOfCode2022 {
                 }
             }
 
-            mutating func run() async throws {
-                print(try await process(input: Resource.input(day: Day, test: options.test)))
+            mutating func run() throws {
+                print(try process(input: Resource.input(day: Day, test: options.test)))
             }
             
-            func process(input: URL) async throws -> String {
+            func process(input: URL) throws -> String {
                 let result = try LineReader(source: input).read().parse(shape: convert)
                     .map { $0.me.against($0.opp).rawValue + $0.me.rawValue }
                     .reduce(0, +)
@@ -80,7 +80,7 @@ extension AdventOfCode2022 {
             }
         }
         
-        struct B: AsyncParsableCommand {
+        struct B: ParsableCommand {
             static var configuration = CommandConfiguration(abstract: "⭐️ Day \(Day)b")
             @OptionGroup var options: AdventOfCode2022.Options
 
@@ -102,11 +102,11 @@ extension AdventOfCode2022 {
                 }
             }
 
-            mutating func run() async throws {
-                print(try await process(input: Resource.input(day: Day, test: options.test)))
+            mutating func run() throws {
+                print(try process(input: Resource.input(day: Day, test: options.test)))
             }
             
-            func process(input: URL) async throws -> String {
+            func process(input: URL) throws -> String {
                 let result = try LineReader(source: input).read().parse(shape: convert(shape:), outcome: convert(outcome:))
                     .map { $0.outcome.rawValue + $0.opp.choose(for: $0.outcome).rawValue }
                     .reduce(0, +)

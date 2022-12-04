@@ -4,37 +4,37 @@ import ArgumentParser
 fileprivate let Day = 1
 
 extension AdventOfCode2022 {
-    struct Day01: AsyncParsableCommand {
+    struct Day01: ParsableCommand {
         static var configuration = CommandConfiguration(
             abstract: "🎄 Day \(Day)",
             subcommands: [A.self, B.self],
             defaultSubcommand: B.self
         )
         
-        struct A: AsyncParsableCommand {
+        struct A: ParsableCommand {
             static var configuration = CommandConfiguration(abstract: "⭐️ Day \(Day)a")
             @OptionGroup var options: AdventOfCode2022.Options
             
-            mutating func run() async throws {
-                print(try await process(input: Resource.input(day: Day, test: options.test)))
+            mutating func run() throws {
+                print(try process(input: Resource.input(day: Day, test: options.test)))
             }
             
-            func process(input: URL) async throws -> String {
+            func process(input: URL) throws -> String {
                 let rations = try LineReader(source: input).read(skipEmpty: false).toElfRations()
                 let result = rations.map { $0.reduce(0, +) } .max()
                 return "\(result!)"
             }
         }
         
-        struct B: AsyncParsableCommand {
+        struct B: ParsableCommand {
             static var configuration = CommandConfiguration(abstract: "⭐️ Day \(Day)b")
             @OptionGroup var options: AdventOfCode2022.Options
             
-            mutating func run() async throws {
-                print(try await process(input: Resource.input(day: Day, test: options.test)))
+            mutating func run() throws {
+                print(try process(input: Resource.input(day: Day, test: options.test)))
             }
             
-            func process(input: URL) async throws -> String {
+            func process(input: URL) throws -> String {
                 let rations = try LineReader(source: input).read(skipEmpty: false).toElfRations()
                 let result = rations
                     .map { $0.reduce(0, +) }

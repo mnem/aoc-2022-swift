@@ -5,15 +5,15 @@ import XCTest
 final class Day03Tests: XCTestCase {
     private var input: URL { Resource.input(day: 3, test: true) }
     
-    func testA() async throws {
+    func testA() throws {
         let sut = AdventOfCode2022.Day03.A()
-        let result = try await sut.process(input: input)
+        let result = try sut.process(input: input)
         XCTAssertEqual(result, "157")
     }
     
-    func testB() async throws {
+    func testB() throws {
         let sut = AdventOfCode2022.Day03.B()
-        let result = try await sut.process(input: input)
+        let result = try sut.process(input: input)
         XCTAssertEqual(result, "70")
     }
 }

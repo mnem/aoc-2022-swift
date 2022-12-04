@@ -1,11 +1,11 @@
 import ArgumentParser
 
 @main
-struct AdventOfCode2022: AsyncParsableCommand {
+struct AdventOfCode2022: ParsableCommand {
     static var configuration = CommandConfiguration(
         abstract: "❄️ Advent of Code 2022, Swift edition ☃️",
-        subcommands: [Day01.self, Day02.self, Day03.self],
-        defaultSubcommand: Day03.self
+        subcommands: [Day01.self, Day02.self, Day03.self, Day04.self],
+        defaultSubcommand: Day04.self
     )
     
     struct Options: ParsableArguments {
