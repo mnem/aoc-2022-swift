@@ -5,7 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "aoc-2022-swift",
-    platforms: [.macOS(.v12)],
+    platforms: [.macOS(.v13)],
     dependencies: [
         .package(url: "https://github.com/apple/swift-argument-parser", from: "1.1.0"),
         .package(url: "https://github.com/apple/swift-algorithms", from: "1.0.0"),
