@@ -1,3 +1,3 @@
 # aoc-2022-swift
 
-A description of this package.
+Solutions for [Advent of Code 2022](https://adventofcode.com/2022). I might even finish it this time!
