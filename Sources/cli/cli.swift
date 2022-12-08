@@ -6,9 +6,9 @@ struct AdventOfCode2022: ParsableCommand {
         abstract: "❄️ Advent of Code 2022, Swift edition ☃️",
         subcommands: [
             Day01.self, Day02.self, Day03.self, Day04.self, Day05.self,
-            Day06.self, Day07.self
+            Day06.self, Day07.self, Day08.self
         ],
-        defaultSubcommand: Day07.self
+        defaultSubcommand: Day08.self
     )
     
     struct Options: ParsableArguments {
