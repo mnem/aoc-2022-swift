@@ -21,23 +21,6 @@ extension AdventOfCode2022 {
         }
         
         struct Drone {
-            struct P: Hashable {
-                var x = 0
-                var y = 0
-                
-                static func +(lhs: P, rhs: P) -> P {
-                    .init(
-                        x: lhs.x + rhs.x,
-                        y: lhs.y + rhs.y
-                    )
-                }
-                
-                static func +=(lhs: inout P, rhs: P) {
-                    lhs = lhs + rhs
-                }
-                
-            }
-            
             let patch: [[Int]]
             
             init(patch: [[Int]]) {
@@ -116,14 +99,14 @@ extension AdventOfCode2022 {
             
             func process(input: URL) throws -> String {
                 let drone = Drone(patch: try Day08.parse(input))
-                var seen = Set<Drone.P>()
+                var seen = Set<P>()
                 drone.visit { x, y in
-                    let tree = Drone.P(x: x,  y: y)
+                    let tree = P(x: x,  y: y)
                     if drone.visible(tree: tree) {
                         seen.insert(tree)
                     }
                 }
-                
+
                 return seen.count.toString()
             }
         }
