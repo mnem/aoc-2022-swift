@@ -121,14 +121,6 @@ extension AdventOfCode2022 {
             let lines = try LineReader(source: input)
                 .read()
                 .map(Line.init)
-            
-            let foo = lines.filter { line in
-                if case .entry(.dir) = line {
-                    return true
-                } else {
-                    return false
-                }
-            }
 
             guard let first = lines.first,
                   case Line.command(Line.Command.cd(path: "/")) = first
